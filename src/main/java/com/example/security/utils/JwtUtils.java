@@ -5,13 +5,14 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtils {
-    private final String SECRET_KEY = "key-for-JWT";
+    private final String SECRET_KEY = "MyUltraSecureJWTSecretKeyThatIsLongEnough123456789";
     private final long EXPIRATION = 86400000;
 
     private Key getSignKey(){
@@ -24,6 +25,24 @@ public class JwtUtils {
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
         .signWith(getSignKey(), SignatureAlgorithm.HS256)
-        .compact();
+        .compact(); 
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
+    public boolean isTokenValid(String token){
+        try {
+            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 }
