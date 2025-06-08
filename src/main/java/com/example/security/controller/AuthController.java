@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.security.dto.LoginDto;
+import com.example.security.dto.ResponseDto;
 
 @RestController
 @RequestMapping("api/auth/")
@@ -20,9 +22,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RequestDto dto) {
-        
+    public ResponseEntity<ResponseDto> register(@RequestBody RequestDto dto) {
+
         return ResponseEntity.ok(authService.register(dto));
     }
+
+    @PostMapping("login")
+    public ResponseEntity<ResponseDto> login(@RequestBody LoginDto dto) {
+
+        return ResponseEntity.ok(authService.login(dto));
+    }
+
     
+
 }
