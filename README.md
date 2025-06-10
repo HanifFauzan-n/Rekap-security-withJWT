@@ -14,6 +14,7 @@
 | `@RequestMapping`          | Menentukan mapping URL root pada controller                                   |
 | `@PostMapping`             | Mapping HTTP POST ke method tertentu                                          |
 | `@GetMapping`              | Mapping HTTP GET ke method tertentu                                           |
+| `@DeleteMapping`           | Mapping HTTP DELETE ke method tertentu
 | `@RequestBody`             | Menyatakan bahwa parameter method berasal dari body permintaan (JSON)         |
 | `@Valid`                   | Memicu validasi terhadap data yang masuk (digunakan bersama DTO)              |
 | `@Slf4j`                   | Anotasi Lombok untuk menambahkan logger `log`                                 |
