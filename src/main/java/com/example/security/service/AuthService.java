@@ -23,6 +23,7 @@ public class AuthService {
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
     private final JwtUtils jwtUtils;
 
     public ResponseDto register(RequestDto dto) {
@@ -42,6 +43,11 @@ public class AuthService {
         usersRepository.save(user);
 
         String token = jwtUtils.generateToken(user.getUsername());
+        String subject = "Selamat, Anda sekarang terhubung dengan layanan aplikasi kami";
+        String text = "Hallo " + user.getUsername() + " , terimakasih untuk pendaftaran layanan aplikasi kami";
+
+        emailService.sendSimpleMail(user.getEmail(), subject, text);
+
         return new ResponseDto(token);
     }
 
