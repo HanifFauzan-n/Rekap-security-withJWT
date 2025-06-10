@@ -43,10 +43,12 @@ public class AuthService {
         usersRepository.save(user);
 
         String token = jwtUtils.generateToken(user.getUsername());
-        String subject = "Selamat, Anda sekarang terhubung dengan layanan aplikasi kami";
-        String text = "Hallo " + user.getUsername() + " , terimakasih untuk pendaftaran layanan aplikasi kami";
 
-        emailService.sendSimpleMail(user.getEmail(), subject, text);
+         try {
+            emailService.sendWelcomeEmail(user.getEmail(), user.getUsername());
+        } catch (Exception e) {
+            e.getMessage();
+        }
 
         return new ResponseDto(token);
     }
