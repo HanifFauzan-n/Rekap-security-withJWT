@@ -20,3 +20,21 @@
 | `@Slf4j`                   | Anotasi Lombok untuk menambahkan logger `log`                                 |
 | `@RequiredArgsConstructor` | Anotasi Lombok untuk membuat constructor otomatis untuk field `final`         |
 | `@CrossOrigin`             | Mengizinkan permintaan dari domain luar (CORS)                                |
+
+# Email Service
+
+| Anotasi / Komponen  | Fungsi                                                            |
+| ------------------- | ----------------------------------------------------------------- |
+| `JavaMailSender`    | Spring komponen untuk mengirim email.                             |
+| `MimeMessage`       | Objek email lengkap (bisa HTML, lampiran, dll).                   |
+| `MimeMessageHelper` | Membantu menyusun isi email (subjek, penerima, konten HTML, dll). |
+
+# Jwt Utils
+
+| Method              | Fungsi                                               |
+| ------------------- | ---------------------------------------------------- |
+| `generateToken()`   | Buat token berdasarkan username, dengan expired time |
+| `extractUsername()` | Ambil username dari token JWT                        |
+| `isTokenValid()`    | Validasi token (expired atau tidak)                  |
+
+
