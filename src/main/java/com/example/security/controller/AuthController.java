@@ -64,7 +64,8 @@ public class AuthController {
             emailService.sendResetPasswordEmail(user.get().getEmail(), link);
             return ResponseEntity.ok("Email reset telah dikirim.");
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            e.getMessage();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Terjadi kesalahan saat mengirim email.");
         }
