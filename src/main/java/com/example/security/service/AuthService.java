@@ -38,6 +38,7 @@ public class AuthService {
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setVerified(false);
         user.setRoles(Set.of(role));
 
         usersRepository.save(user);
@@ -45,6 +46,7 @@ public class AuthService {
         String token = jwtUtils.generateToken(user.getUsername());
 
          try {
+            emailService.sendVerifyEmail(user.getEmail(), token);
             emailService.sendWelcomeEmail(user.getEmail(), user.getUsername());
         } catch (Exception e) {
             e.getMessage();

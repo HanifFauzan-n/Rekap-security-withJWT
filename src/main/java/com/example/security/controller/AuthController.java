@@ -23,6 +23,9 @@ import com.example.security.utils.JwtUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/auth/")
@@ -86,5 +89,24 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token tidak valid atau sudah expired.");
     }
+
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyUSer(@RequestParam String token) {
+        String username = jwtUtils.extractUsername(token);
+        Users user = usersRepository.findByUsername(username).orElse(null);
+
+        if(user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User tidak ditemukan");
+        }
+
+        if(!jwtUtils.isTokenValid(token)){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token tidak valid atau kadaluarsa");
+        }
+
+        user.setVerified(true);
+        usersRepository.save(user);
+        return ResponseEntity.ok("Akun telah di ferifikasi");
+    }
+    
 
 }
