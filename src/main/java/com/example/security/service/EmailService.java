@@ -47,6 +47,18 @@ public class EmailService {
         return html.replace("${resetLink}", resetLink);
     }
 
+    public String loadEmailVerified(String token) throws Exception {
+        String path = "src/main/resources/templates/verify-email.html";
+        String html = Files.readString(Path.of(path));
+        String verifyLink = "http://localhost:8080/api/auth/verify?token=" + token;
+        return html.replace("${link}", verifyLink);
+    }
+
+    public void sendVerifyEmail(String to, String token) throws Exception {
+        String htmlContent = loadEmailVerified(token);
+        sendHtmlEmail(to,"Verifikasi Email Anda", htmlContent);
+    }
+
     public void sendResetPasswordEmail(String to, String token) throws Exception {
         String htmlContent = loadEmailResetPassword(token);
         log.info(htmlContent);
