@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,9 @@ public class Users implements UserDetails {
     private String username;
     private String email;
     private String password;
+
+    @Column(nullable = false)
+    private boolean verified = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
