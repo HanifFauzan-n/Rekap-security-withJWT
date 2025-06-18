@@ -30,7 +30,7 @@ public class AuthService {
         if (usersRepository.findByUsername(dto.getUsername()).isPresent())
             throw new RuntimeException("Username Already exists");
 
-        Role role = roleRepository.findByName("ROLE_USERS")
+        Role role = roleRepository.findByName("ROLE_USER")
                 .orElseGet(() -> roleRepository.save(new Role(null, "ROLE_USERS")));
 
         Users user = new Users();
