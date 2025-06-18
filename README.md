@@ -37,4 +37,13 @@
 | `extractUsername()` | Ambil username dari token JWT                        |
 | `isTokenValid()`    | Validasi token (expired atau tidak)                  |
 
+# Exception
+
+| Error                        | Lemparkan Exception                         |
+| ---------------------------- | ------------------------------------------- |
+| Data tidak ditemukan         | `throw new EntityNotFoundException("...")`  |
+| Validasi gagal               | `throw new IllegalArgumentException("...")` |
+| Custom (misal token invalid) | `throw new RuntimeException("Token salah")` |
+
+
 
