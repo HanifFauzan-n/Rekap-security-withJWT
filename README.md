@@ -41,7 +41,7 @@
 
 | Error                        | Lemparkan Exception                         |
 | ---------------------------- | ------------------------------------------- |
-| Data tidak ditemukan         | `throw new EntityNotFoundException("...")`  |
+| Data tidak ditemukan         | `throw new EntityNotFoundException("data tidak ditemukan")`  |
 | Validasi gagal               | `throw new IllegalArgumentException("...")` |
 | Custom (misal token invalid) | `throw new RuntimeException("Token salah")` |
 
